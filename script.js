@@ -11,6 +11,7 @@ const preloaderVideo = document.querySelector(".preloader-video");
 const preloaderShade = document.querySelector(".preloader-shade");
 const preloaderContent = document.querySelector(".preloader-content");
 const firstSceneVideo = scenes[0]?.querySelector(".scene-video");
+const firstScene = scenes[0];
 const firstSceneClickTarget = scenes[0];
 
 let soundEnabled = false;
@@ -101,36 +102,41 @@ function activateScene(scene) {
 }
 
 function goToScene(index) {
-  if (!scenes.length || document.body.classList.contains("is-loading")) return;
+  if (!scenes.length) return;
 
   const nextIndex = Math.max(0, Math.min(index, scenes.length - 1));
+
   if (nextIndex === activeIndex || isAnimatingScroll) return;
 
   isAnimatingScroll = true;
+
   gsap.to(window, {
     duration: 0.82,
-    scrollTo: { y: scenes[nextIndex], autoKill: false },
+    scrollTo: {
+      y: scenes[nextIndex],
+      autoKill: false,
+    },
     ease: "power3.inOut",
+
     onComplete: () => {
       activeIndex = nextIndex;
+      isAnimatingScroll = false;
+    },
+
+    onInterrupt: () => {
       isAnimatingScroll = false;
     },
   });
 }
 
-const scene1 = document.querySelector("#scene-1");
-
-if (scene1) {
-  scene1.addEventListener("click", () => {
-    // التأكد من أن الصفحة ليست في مرحلة التحميل
-    if (!document.body.classList.contains("is-loading")) {
-      goToScene(1); // الانتقال إلى المشهد الثاني (data-index 2)
-    }
-  });
-}
-
 if (preloader) {
   preloader.addEventListener("click", hidePreloader);
+}
+
+if (firstScene) {
+  firstScene.addEventListener("click", () => {
+    goToScene(1);
+  });
 }
 
 window.addEventListener(
@@ -165,7 +171,16 @@ window.addEventListener(
   (event) => {
     event.preventDefault();
     const distance = touchStartY - event.changedTouches[0].clientY;
-    if (Math.abs(distance) < 48) return;
+    if (Math.abs(distance) < 48) {
+      if (
+        firstScene &&
+        firstScene.contains(event.target) &&
+        activeIndex === 0
+      ) {
+        goToScene(1);
+      }
+      return;
+    }
     goToScene(activeIndex + (distance > 0 ? 1 : -1));
   },
   { passive: false },
@@ -201,7 +216,18 @@ if (document.readyState === "loading") {
 } else {
   initIntro();
 }
+const scene1 = document.querySelector("#scene-1");
 
+if (scene1) {
+  scene1.addEventListener("click", () => {
+    if (document.body.classList.contains("is-loading")) return;
+
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
+  });
+}
 function initIntro() {
   if (introInitStarted) return;
   introInitStarted = true;
@@ -309,7 +335,42 @@ function hidePreloader() {
     },
   });
 
-  // بقية الكود كما هو...
+  timeline
+    .to(
+      preloader,
+      {
+        duration: 1.05,
+        autoAlpha: 0,
+      },
+      0.12,
+    )
+    .to(
+      preloaderVideo,
+      {
+        duration: 1,
+        scale: 1.28,
+        yPercent: -4,
+        rotateX: -18,
+        rotateY: 7,
+        z: 260,
+        autoAlpha: 0,
+      },
+      0,
+    )
+    .to(
+      firstSceneVideo,
+      {
+        duration: 1.55,
+        scale: 1.08,
+        yPercent: 0,
+        rotateX: 0,
+        rotateY: 0,
+        z: 0,
+        autoAlpha: 1,
+        ease: "expo.out",
+      },
+      0.06,
+    );
 }
 
 function restartVideo(video) {
