@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#18231e" />
+    <title>المحمدى بيفرح</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="is-loading">
+    <div class="preloader" aria-label="جاري تجهيز الدعوة">
+      <video
+        class="preloader-video"
+        src="start.mp4"
+        muted
+        autoplay
+        loop
+        playsinline
+        preload="auto"></video>
+    </div>
+
+    <main class="story">
+      <section class="scene scene--intro" id="scene-1" data-index="1">
+        <video
+          class="scene-video"
+          src="1.mp4"
+          muted
+          loop
+          playsinline
+          preload="auto"></video>
+      </section>
+
+      <section class="scene scene--final" id="scene-3" data-index="3">
+        <video
+          class="scene-video"
+          src="3.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+      </section>
+
+      <section class="scene" id="scene-2" data-index="2">
+        <video
+          class="scene-video"
+          src="2.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+      </section>
+
+      <section class="scene" id="scene-4" data-index="4">
+        <video
+          class="scene-video"
+          src="4.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
