@@ -20,6 +20,7 @@ const messageTrigger = document.querySelector(".message-trigger");
 const messageForm = document.querySelector(".message-form");
 const messageClose = document.querySelector(".message-close");
 const messageStatus = document.querySelector(".message-status");
+const sarhahAccountUrl = "https://1892026.sarhne.com";
 
 let soundEnabled = false;
 let activeIndex = 0;
@@ -253,10 +254,17 @@ if (messageTrigger && messageForm) {
     const message = messageForm.querySelector("textarea");
     if (!message?.value.trim()) return;
 
-    if (messageStatus) messageStatus.textContent = "تم استلام رسالتك شكرًا لك";
+    if (messageStatus) {
+      messageStatus.textContent = "جاري تحويلك إلى حساب الصراحة...";
+    }
+
     message.value = "";
     messageForm.hidden = true;
     messageTrigger.setAttribute("aria-expanded", "false");
+
+    if (sarhahAccountUrl) {
+      window.location.href = sarhahAccountUrl;
+    }
   });
 }
 
