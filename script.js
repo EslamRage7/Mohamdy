@@ -18,6 +18,7 @@ const mediaUpload = document.querySelector("#media-upload");
 const uploadStatus = document.querySelector(".upload-status");
 const messageTrigger = document.querySelector(".message-trigger");
 const messageForm = document.querySelector(".message-form");
+const messageClose = document.querySelector(".message-close");
 const messageStatus = document.querySelector(".message-status");
 
 let soundEnabled = false;
@@ -230,6 +231,14 @@ if (mediaUpload) {
 }
 
 if (messageTrigger && messageForm) {
+  messageClose?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    messageForm.reset();
+    messageForm.hidden = true;
+    messageTrigger.setAttribute("aria-expanded", "false");
+  });
+
   messageTrigger.addEventListener("click", (event) => {
     event.stopPropagation();
     const isOpen = !messageForm.hidden;
@@ -343,7 +352,7 @@ function initIntro() {
   }
 
   revealPreloaderVideo();
-  gsap.delayedCall(3, hidePreloader);
+  gsap.delayedCall(5, hidePreloader);
 }
 
 function prepareIntroTransition() {
