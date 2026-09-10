@@ -8,11 +8,14 @@ const soundIcon = document.querySelector(".sound-icon");
 const story = document.querySelector(".story");
 const preloader = document.querySelector(".preloader");
 const preloaderVideo = document.querySelector(".preloader-video");
+const backgroundMusic = document.querySelector("#background-music");
 const preloaderShade = document.querySelector(".preloader-shade");
 const preloaderContent = document.querySelector(".preloader-content");
 const firstSceneVideo = scenes[0]?.querySelector(".scene-video");
 const firstScene = scenes[0];
+const secondScene = scenes[1];
 const scrollCue = document.querySelector(".scroll-cue");
+const countdown = document.querySelector(".countdown");
 const locationCopy = document.querySelector(".location-copy");
 const mediaUpload = document.querySelector("#media-upload");
 const uploadStatus = document.querySelector(".upload-status");
@@ -73,6 +76,7 @@ scenes.forEach((scene, index) => {
           start: "top bottom",
           end: "top top",
           scrub: 1.05,
+          invalidateOnRefresh: true,
         },
       },
     );
@@ -164,12 +168,27 @@ function goToScene(index) {
 }
 
 if (preloader) {
-  preloader.addEventListener("click", hidePreloader);
+  preloader.addEventListener("click", () => {
+    playBackgroundMusic();
+  });
+}
+
+playBackgroundMusic();
+
+function playBackgroundMusic() {
+  if (!backgroundMusic) return;
+  backgroundMusic.play().catch(() => {});
 }
 
 if (firstScene) {
   firstScene.addEventListener("click", () => {
     goToScene(1);
+  });
+}
+
+if (secondScene) {
+  secondScene.addEventListener("click", () => {
+    goToScene(2);
   });
 }
 
@@ -339,6 +358,48 @@ if (soundToggle) {
   });
 }
 
+if (countdown) {
+  const now = new Date();
+  let weddingDate = new Date(now.getFullYear(), 8, 18, 20, 0, 0);
+
+  if (weddingDate <= now) {
+    weddingDate = new Date(now.getFullYear() + 1, 8, 18, 20, 0, 0);
+  }
+
+  const countdownDays = countdown.querySelector('[data-countdown="days"]');
+  const countdownHours = countdown.querySelector('[data-countdown="hours"]');
+  const countdownMinutes = countdown.querySelector(
+    '[data-countdown="minutes"]',
+  );
+  const countdownSeconds = countdown.querySelector(
+    '[data-countdown="seconds"]',
+  );
+
+  const updateCountdown = () => {
+    const remaining = Math.max(0, weddingDate.getTime() - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    if (countdownDays)
+      countdownDays.textContent = String(days).padStart(2, "0");
+    if (countdownHours) {
+      countdownHours.textContent = String(hours).padStart(2, "0");
+    }
+    if (countdownMinutes) {
+      countdownMinutes.textContent = String(minutes).padStart(2, "0");
+    }
+    if (countdownSeconds) {
+      countdownSeconds.textContent = String(seconds).padStart(2, "0");
+    }
+  };
+
+  updateCountdown();
+  window.setInterval(updateCountdown, 1000);
+}
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initIntro, { once: true });
 } else {
@@ -360,7 +421,7 @@ function initIntro() {
   }
 
   revealPreloaderVideo();
-  gsap.delayedCall(5, hidePreloader);
+  gsap.delayedCall(7, hidePreloader);
 }
 
 function prepareIntroTransition() {

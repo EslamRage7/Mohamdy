@@ -224,6 +224,9 @@ button {
   filter: blur(0) saturate(1);
   will-change: transform, opacity, filter;
 }
+#scene-5 .scene-video {
+  filter: blur(7px) saturate(0.8);
+}
 .scene-shade {
   position: absolute;
   inset: 0;
@@ -426,6 +429,55 @@ h2 em {
   align-items: center;
   gap: 11px;
   transform: translateX(50%);
+}
+.countdown {
+  position: fixed;
+  right: 50%;
+  bottom: 18px;
+  z-index: 25;
+  width: min(92vw, 320px);
+  padding: 7px 10px 8px;
+  border: 1px solid rgba(216, 185, 141, 0.36);
+  border-radius: 14px;
+  background: rgba(23, 35, 30, 0.48);
+  backdrop-filter: blur(6px);
+  text-align: center;
+  transform: translateX(50%);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+body.is-loading .countdown {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.countdown-title {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 9px;
+}
+.countdown-values {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  direction: ltr;
+}
+.countdown-unit {
+  display: grid;
+  min-width: 58px;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 9px;
+}
+.countdown-unit strong {
+  color: var(--accent);
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
 }
 .location-copy,
 .location-open {
@@ -731,6 +783,15 @@ h2 em {
     bottom: 22px;
     width: calc(100% - 40px);
     justify-content: center;
+  }
+  .countdown {
+    bottom: 18px;
+    right: 50%;
+    width: calc(100% - 40px);
+    transform: translateX(50%);
+  }
+  .countdown-unit {
+    min-width: 52px;
   }
   .location-copy {
     max-width: calc(100% - 40px);
