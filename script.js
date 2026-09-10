@@ -57,13 +57,18 @@ scenes.forEach((scene, index) => {
   }
 
   if (index > 0) {
+    const initialVideoFilter =
+      index === scenes.length - 1
+        ? "blur(0px) saturate(1)"
+        : "blur(7px) saturate(0.8)";
+
     gsap.fromTo(
       video,
       {
         scale: 1.16,
         yPercent: 4,
         autoAlpha: 0.45,
-        filter: "blur(7px) saturate(0.8)",
+        filter: initialVideoFilter,
       },
       {
         scale: 1,

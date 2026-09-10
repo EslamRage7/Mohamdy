@@ -225,7 +225,7 @@ button {
   will-change: transform, opacity, filter;
 }
 #scene-5 .scene-video {
-  filter: blur(7px) saturate(0.8);
+  filter: blur(0) saturate(1);
 }
 .scene-shade {
   position: absolute;
