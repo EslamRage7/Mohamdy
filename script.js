@@ -267,21 +267,20 @@ window.addEventListener(
     if (event.touches.length !== 1) return;
     touchStartY = event.touches[0].clientY;
   },
-  { passive: false },
+  { passive: true },
 );
 
 window.addEventListener(
   "touchmove",
-  (event) => {
-    event.preventDefault();
+  () => {
+    // Let the browser continue natural mobile scrolling and click handling.
   },
-  { passive: false },
+  { passive: true },
 );
 
 window.addEventListener(
   "touchend",
   (event) => {
-    event.preventDefault();
     const distance = touchStartY - event.changedTouches[0].clientY;
     if (Math.abs(distance) < 48) {
       if (
@@ -295,7 +294,7 @@ window.addEventListener(
     }
     goToScene(activeIndex + (distance > 0 ? 1 : -1));
   },
-  { passive: false },
+  { passive: true },
 );
 
 if (soundToggle) {
