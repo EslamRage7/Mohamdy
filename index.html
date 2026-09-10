@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#18231e" />
+    <title>المحمدى بيفرح</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="is-loading">
+    <div class="preloader" aria-label="جاري تجهيز الدعوة">
+      <video
+        class="preloader-video"
+        src="start.mp4"
+        muted
+        autoplay
+        loop
+        playsinline
+        preload="auto"></video>
+    </div>
+
+    <main class="story">
+      <section class="scene scene--intro" id="scene-1" data-index="1">
+        <video
+          class="scene-video"
+          src="1.mp4"
+          muted
+          loop
+          playsinline
+          preload="auto"></video>
+        <button
+          class="scroll-cue"
+          type="button"
+          aria-label="انتقل للفيديو التالي">
+          <span>اسحب لأسفل أو اضغط للمتابعة</span>
+          <span class="scroll-arrow" aria-hidden="true">↓</span>
+        </button>
+      </section>
+
+      <section class="scene" id="scene-2" data-index="2">
+        <video
+          class="scene-video"
+          src="2.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+      </section>
+
+      <section class="scene scene--final" id="scene-3" data-index="3">
+        <video
+          class="scene-video"
+          src="3.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+
+        <div class="location-actions">
+          <button
+            class="location-copy"
+            type="button"
+            data-location="https://maps.app.goo.gl/oMNGZXKWgPqYE2Dt9?g_st=iw"
+            aria-label="نسخ لوكيشن الفرح">
+            <span class="location-pin" aria-hidden="true">⌖</span>
+            <span class="location-copy-text">نسخ اللوكيشن</span>
+            <span class="location-copy-icon" aria-hidden="true">⧉</span>
+          </button>
+          <a
+            class="location-open"
+            href="https://maps.app.goo.gl/oMNGZXKWgPqYE2Dt9?g_st=iw"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="فتح لوكيشن الفرح على جوجل ماب">
+            <span class="location-pin" aria-hidden="true">⌖</span>
+            <span>فتح على جوجل ماب</span>
+            <span class="location-open-icon" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-4" data-index="4">
+        <video
+          class="scene-video"
+          src="4.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+      </section>
+
+      <section class="scene" id="scene-5" data-index="5">
+        <video
+          class="scene-video"
+          src="5.mp4"
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+        <div class="message-panel">
+          <button class="message-trigger" type="button" aria-expanded="false">
+            <span class="message-icon" aria-hidden="true">✎</span>
+            <span>اكتب رسالة</span>
+          </button>
+          <form class="message-form" hidden>
+            <label class="sr-only" for="guest-message">اكتب رسالتك</label>
+            <textarea
+              id="guest-message"
+              maxlength="300"
+              placeholder="اكتب رسالتك هنا..."
+              required></textarea>
+            <button type="submit">إرسال الرسالة</button>
+          </form>
+          <p class="message-status" aria-live="polite"></p>
+        </div>
+
+        <div class="upload-panel">
+          <a
+            class="drive-upload-button friends"
+            href="https://drive.google.com/drive/folders/1p_AhfC7D2V4mImZ9B6IKANkwpn4ObX1W?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="فتح درايف لرفع الصور والفيديوهات">
+            <span class="drive-upload-icon" aria-hidden="true">⇪</span>
+            <span>الصحاب</span>
+          </a>
+
+          <a
+            class="drive-upload-button family"
+            href="https://drive.google.com/drive/folders/1TJq2Cqtx8m6Pkqc5-PnnzQ_uBlGXz_1h?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="فتح درايف لرفع الصور والفيديوهات">
+            <span class="drive-upload-icon" aria-hidden="true">⇪</span>
+            <span>العيلة</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
