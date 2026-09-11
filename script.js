@@ -14,6 +14,7 @@ const preloaderContent = document.querySelector(".preloader-content");
 const firstSceneVideo = scenes[0]?.querySelector(".scene-video");
 const firstScene = scenes[0];
 const secondScene = scenes[1];
+const fourthScene = scenes[3];
 const scrollCue = document.querySelector(".scroll-cue");
 const countdown = document.querySelector(".countdown");
 const locationCopy = document.querySelector(".location-copy");
@@ -175,18 +176,29 @@ function goToScene(index) {
 if (preloader) {
   preloader.addEventListener("click", () => {
     playBackgroundMusic();
+    if (!introTransitionStarted) {
+      hidePreloader();
+    }
   });
 }
 
-playBackgroundMusic();
-
 function playBackgroundMusic() {
   if (!backgroundMusic) return;
-  backgroundMusic.play().catch(() => {});
+
+  try {
+    backgroundMusic.volume = 0.72;
+    backgroundMusic.muted = false;
+    if (backgroundMusic.paused) {
+      backgroundMusic.play().catch(() => {});
+    }
+  } catch {
+    // Audio playback can be blocked until the user interacts.
+  }
 }
 
 if (firstScene) {
   firstScene.addEventListener("click", () => {
+    playBackgroundMusic();
     goToScene(1);
   });
 }
@@ -194,6 +206,12 @@ if (firstScene) {
 if (secondScene) {
   secondScene.addEventListener("click", () => {
     goToScene(2);
+  });
+}
+
+if (fourthScene) {
+  fourthScene.addEventListener("click", () => {
+    goToScene(4);
   });
 }
 
